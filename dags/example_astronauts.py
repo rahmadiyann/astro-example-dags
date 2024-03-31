@@ -29,7 +29,7 @@ import requests
 @dag(
     start_date=datetime(2024, 4, 1),
     schedule="5 * * * *",
-    catchup=False,
+    catchup=True,
     doc_md=__doc__,
     default_args={"owner": "Astro", "retries": 3},
     tags=["example"],
