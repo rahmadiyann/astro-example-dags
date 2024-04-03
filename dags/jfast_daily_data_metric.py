@@ -23,7 +23,7 @@ dagname = "jfast_daily_data_metric"
 dag = DAG(
     dagname,
     default_args=default_args,
-    description='A DAG with tasks having random durations',
+    description=dagname,
     schedule_interval='30 0 * * *',
     catchup=False,
     tags=['priority']

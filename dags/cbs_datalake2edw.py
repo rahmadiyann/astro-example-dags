@@ -23,7 +23,7 @@ dagname = "cbs_datalake2edw"
 dag = DAG(
     dagname,
     default_args=default_args,
-    description='A DAG with tasks having random durations',
+    description=dagname,
     schedule_interval='0 4 * * *',
     catchup=False,
     tags=['priority']

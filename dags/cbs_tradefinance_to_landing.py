@@ -23,7 +23,7 @@ dagname = "cbs_tradefinance_to_landing"
 dag = DAG(
     dagname,
     default_args=default_args,
-    description='A DAG with tasks having random durations',
+    description=dagname,
     schedule_interval='30 22 * * *',
     catchup=False,
     tags=['priority']

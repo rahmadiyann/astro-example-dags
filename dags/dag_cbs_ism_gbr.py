@@ -23,7 +23,7 @@ dagname = "dag_cbs_ism_gbr"
 dag = DAG(
     dagname,
     default_args=default_args,
-    description='A DAG with tasks having random durations',
+    description=dagname,
     schedule_interval='0 23 * * *',
     catchup=False,
     tags=['priority']

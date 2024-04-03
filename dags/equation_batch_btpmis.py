@@ -23,7 +23,7 @@ dagname = "equation_batch_btpmis"
 dag = DAG(
     dagname,
     default_args=default_args,
-    description='A DAG with tasks having random durations',
+    description=dagname,
     schedule_interval='0 0 * * *',
     catchup=False,
     tags=['priority']
