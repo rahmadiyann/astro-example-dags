@@ -1,6 +1,12 @@
 import psycopg2
 import os
 from datetime import datetime
+import pendulum
+
+local_tz = pendulum.timezone('Asia/Jakarta')
+timenowinjakarta = datetime.now().astimezone(local_tz)
+#time in HH:MM format
+timenow = timenowinjakarta.strftime("%H:%M")
 
 conn = psycopg2.connect(
     dbname=os.environ.get('DATABASE_NAME'),
@@ -11,9 +17,8 @@ conn = psycopg2.connect(
 
 #get the name from table priority_job
 def update_end_time(dagname):
-    end_time = datetime.now().strftime("%H:%M")
     cur = conn.cursor()
-    cur.execute("UPDATE priority_job SET end_time = %s, status = 'DONE' WHERE job_name = %s", (str(end_time), dagname))
+    cur.execute("UPDATE priority_job SET end_time = %s, status = 'DONE' WHERE job_name = %s", (str(timenow), dagname))
     conn.commit()
     cur.close()
 

@@ -1,14 +1,18 @@
 from datetime import datetime
 import requests
+import pendulum
+
+local_tz = pendulum.timezone('Asia/Jakarta')
 
 def job_status_message(statuses):
     # todays date in format 03/Apr/2024
-    today = datetime.now().strftime("%d/%b/%Y")
+    today_in_jakarta = datetime.now().astimezone(local_tz)
+    today = today_in_jakarta.strftime("%d/%b/%Y")
     # time now in format 01:00
-    time_now = datetime.now().strftime("%H:%M")
+    time_now_in_jakarta = today_in_jakarta.strftime("%H:%M")
     header_message = f"""Dear all,
 Berikut update status job priority airflow
-*{today} - {time_now}*
+*{today} - {time_now_in_jakarta}*
 """
     for job in statuses:
         message = f"""
