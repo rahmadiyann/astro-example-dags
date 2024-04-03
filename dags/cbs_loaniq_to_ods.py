@@ -11,7 +11,7 @@ import time
 local_tz = pendulum.timezone('Asia/Jakarta')
 
 default_args = {
-    'owner': 'airflow',
+    'owner': 'rian',
     'depends_on_past': False,
     'start_date': datetime(2024, 4, 3, tzinfo=local_tz),
     'email_on_failure': False,
@@ -33,7 +33,7 @@ start = DummyOperator(
     dag=dag,
 )
 done = PythonOperator(
-    task_id='my_callback_task',
+    task_id='done',
     python_callable=update_end_time,
     op_kwargs={"dagname": dagname},  # Pass your parameter here as a string
     dag=dag,

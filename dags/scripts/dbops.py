@@ -79,7 +79,7 @@ def fetch_status():
 # local_tz = pendulum.timezone('Asia/Jakarta')
 
 # default_args = {{
-#     'owner': 'airflow',
+#     'owner': 'rian',
 #     'depends_on_past': False,
 #     'start_date': datetime(2024, 4, 3, tzinfo=local_tz),
 #     'email_on_failure': False,
@@ -91,7 +91,7 @@ def fetch_status():
 # dag = DAG(
 #     dagname,
 #     default_args=default_args,
-#     description='A DAG with tasks having random durations',
+#     description=dagname,
 #     schedule_interval='{name['minute']} {name['hour']} * * *',
 #     catchup=False,
 #     tags=['priority']
@@ -101,7 +101,7 @@ def fetch_status():
 #     dag=dag,
 # )
 # done = PythonOperator(
-#     task_id='my_callback_task',
+#     task_id='done',
 #     python_callable=update_end_time,
 #     op_kwargs={{"dagname": dagname}},  # Pass your parameter here as a string
 #     dag=dag,
