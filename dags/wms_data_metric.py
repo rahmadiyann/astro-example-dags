@@ -45,14 +45,15 @@ def run(a,b):
     start = a*60
     end = b*60
     sleep = random.randint(start, end)
-    print("I'm going to sleep for " + str(sleep) + " second")
+    print("I'm going to sleep for " + round(sleep/60) + " minute")
     time.sleep(sleep)
-    print("I woke up after " + str(sleep) + " second")
+    print("I woke up after " + round(sleep/60) + " minute")
+
 
 execute = PythonOperator(
     task_id='execute',
     python_callable=run,
-    op_kwargs={"a": 1, "b": 5},
+    op_kwargs={"a": 10, "b": 20},
 )
 
 start >> execute >> done

@@ -52,7 +52,7 @@ def run(a,b):
 execute = PythonOperator(
     task_id='execute',
     python_callable=run,
-    op_kwargs={"a": 1, "b": 5},
+    op_kwargs={"a": 10, "b": 20},
 )
 
 start >> execute >> done
