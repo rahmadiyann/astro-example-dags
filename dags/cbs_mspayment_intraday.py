@@ -1,10 +1,11 @@
 
 import pendulum
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
 from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
 from scripts.send_message import send_discord_message
+from scripts.helper import seconds_to_hms, pyops
 import random
 import time
 
@@ -48,19 +49,6 @@ done = PythonOperator(
     dag=dag,
 )
 
-def run(a,b):
-    #random sleep in minute
-    start = a*60
-    end = b*60
-    sleep = random.randint(start, end)
-    print(f"I'm going to sleep for {round(sleep/60)} minute ({sleep} seconds)")
-    time.sleep(sleep)
-    print(f"I woke up after {round(sleep/60)} minute ({sleep} seconds)")
-
-execute = PythonOperator(
-    task_id='execute',
-    python_callable=run,
-    op_kwargs={"a": 20, "b": 30},
-)
+execute = pyops(20,30)
 
 start >> execute >> done
