@@ -4,7 +4,7 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.operators.dummy_operator import DummyOperator
 from datetime import datetime, timedelta
 from scripts.send_message import *
-from scripts.dbops import fetch_status
+from scripts.dbops import fetch_status, update_status
 
 local_tz = pendulum.timezone('Asia/Jakarta')
 
@@ -22,7 +22,7 @@ dag = DAG(
     dagname,
     default_args=default_args,
     description=dagname,
-    schedule_interval='0 23-23,0-9 * * *',
+    schedule_interval='5 23-23,0-9 * * *',
     catchup=False,
     tags=['priority']
 )
