@@ -45,9 +45,9 @@ def run(a,b):
     start = a*60
     end = b*60
     sleep = random.randint(start, end)
-    print("I'm going to sleep for " + str(sleep) + " minute")
+    print("I'm going to sleep for " + str(sleep) + " second")
     time.sleep(sleep)
-    print("I woke up after " + str(sleep) + " minute")
+    print("I woke up after " + str(sleep) + " second")
 
 execute = PythonOperator(
     task_id='execute',
