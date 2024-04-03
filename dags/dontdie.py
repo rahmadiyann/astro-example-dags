@@ -8,7 +8,7 @@ import requests
 dag = DAG(
     "dontdie",
     start_date=datetime(2024, 4, 1, 0, 0),
-    schedule="*/5 * * * *",
+    schedule="*/10 * * * *",
     catchup=True,
     default_args={"owner": "rian"},
     tags=["example"],
