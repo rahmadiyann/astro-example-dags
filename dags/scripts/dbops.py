@@ -17,9 +17,15 @@ def update_end_time(context, dagname):
     conn.commit()
     cur.close()
 
+def update_status(context, dagname):
+    cur = conn.cursor()
+    cur.execute("UPDATE priority_job SET status = 'RUNNING' WHERE job_name = %s", (dagname,))
+    conn.commit()
+    cur.close()
+
 def clear_end_time():
     cur = conn.cursor()
-    cur.execute("UPDATE priority_job SET end_time = NULL")
+    cur.execute("UPDATE priority_job SET end_time = NULL, status = 'WAITING'")
     conn.commit()
     cur.close()
 
@@ -73,7 +79,7 @@ def fetch_status():
 # from airflow.operators.dummy_operator import DummyOperator
 # from datetime import datetime, timedelta
 # import random
-# from scripts.dbops import update_end_time
+# from scripts.dbops import update_end_time, update_status
 # import time
 
 # local_tz = pendulum.timezone('Asia/Jakarta')
@@ -96,8 +102,10 @@ def fetch_status():
 #     catchup=False,
 #     tags=['priority']
 # )
-# start = DummyOperator(
+# start = PythonOperator(
 #     task_id='start',
+#     python_callable=update_status,
+#     op_kwargs={{"dagname": dagname}},
 #     dag=dag,
 # )
 # done = PythonOperator(
