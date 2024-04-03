@@ -18,20 +18,30 @@ conn = psycopg2.connect(
 #get the name from table priority_job
 def update_end_time(dagname):
     cur = conn.cursor()
-    cur.execute("UPDATE priority_job SET end_time = %s, status = 'DONE' WHERE name = %s", (str(timenow), dagname))
-    conn.commit()
+    try:
+        cur.execute("UPDATE priority_job SET end_time = %s, status = 'DONE' WHERE name = %s", (str(timenow), dagname))
+        conn.commit()
+        print(f"Update end time for {dagname}")
+    except Exception as e:
+        print(f"Error updating end time for {dagname}: {e}")
     cur.close()
 
 def update_status(dagname):
     cur = conn.cursor()
-    cur.execute("UPDATE priority_job SET status = 'RUNNING' WHERE name = %s", (dagname,))
-    conn.commit()
+    try:
+        cur.execute("UPDATE priority_job SET status = 'RUNNING' WHERE name = %s", (dagname,))
+        conn.commit()
+    except Exception as e:
+        print(f"Error updating status for {dagname}: {e}")
     cur.close()
 
 def clear_end_time():
     cur = conn.cursor()
-    cur.execute("UPDATE priority_job SET end_time = NULL, status = 'WAITING'")
-    conn.commit()
+    try:
+        cur.execute("UPDATE priority_job SET end_time = NULL, status = 'WAITING'")
+        conn.commit()
+    except Exception as e:
+        print(f"Error clearing end time: {e}")
     cur.close()
 
 def fetch_status():
