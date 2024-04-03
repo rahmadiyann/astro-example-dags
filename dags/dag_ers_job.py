@@ -13,7 +13,7 @@ local_tz = pendulum.timezone('Asia/Jakarta')
 default_args = {
     'owner': 'rian',
     'depends_on_past': False,
-    'start_date': datetime(2024, 4, 3, tzinfo=local_tz),
+    'start_date': datetime(2024, 4, 1, tzinfo=local_tz),
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,

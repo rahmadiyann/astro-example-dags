@@ -1,12 +1,10 @@
-
 import pendulum
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.dummy_operator import DummyOperator
 from datetime import datetime, timedelta
-import random
-from scripts.dbops import update_end_time
-import time
+from scripts.send_message import *
+from scripts.dbops import fetch_status
 
 local_tz = pendulum.timezone('Asia/Jakarta')
 
@@ -19,12 +17,12 @@ default_args = {
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
 }
-dagname = "ods_to_staging_and_history_data_metric"
+dagname = "hourly_message"
 dag = DAG(
     dagname,
     default_args=default_args,
     description=dagname,
-    schedule_interval='0 1 * * *',
+    schedule_interval='0 * 23-23,0-9 * * *',
     catchup=False,
     tags=['priority']
 )
@@ -32,25 +30,20 @@ start = DummyOperator(
     task_id='start',
     dag=dag,
 )
-done = PythonOperator(
-    task_id='done',
-    python_callable=update_end_time,
-    op_kwargs={"dagname": dagname},  # Pass your parameter here as a string
+end = DummyOperator(
+    task_id='end',
     dag=dag,
 )
-def run(a,b):
-    #random sleep in minute
-    start = a*60
-    end = b*60
-    sleep = random.randint(start, end)
-    print("I'm going to sleep for " + str(sleep) + " minute")
-    time.sleep(sleep)
-    print("I woke up after " + str(sleep) + " minute")
 
-execute = PythonOperator(
-    task_id='execute',
-    python_callable=run,
-    op_kwargs={"a": 1, "b": 5},
+def send_msg():
+    statuses = fetch_status()
+    status_message = job_status_message(statuses)
+    send_discord_message(status_message)
+
+send_message = PythonOperator(
+    task_id='send_message',
+    python_callable=send_msg,
+    dag=dag,
 )
 
-start >> execute >> done
+start >> send_message >> end
