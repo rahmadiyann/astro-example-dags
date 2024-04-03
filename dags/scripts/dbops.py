@@ -18,13 +18,13 @@ conn = psycopg2.connect(
 #get the name from table priority_job
 def update_end_time(dagname):
     cur = conn.cursor()
-    cur.execute("UPDATE priority_job SET end_time = %s, status = 'DONE' WHERE job_name = %s", (str(timenow), dagname))
+    cur.execute("UPDATE priority_job SET end_time = %s, status = 'DONE' WHERE name = %s", (str(timenow), dagname))
     conn.commit()
     cur.close()
 
 def update_status(dagname):
     cur = conn.cursor()
-    cur.execute("UPDATE priority_job SET status = 'RUNNING' WHERE job_name = %s", (dagname,))
+    cur.execute("UPDATE priority_job SET status = 'RUNNING' WHERE name = %s", (dagname,))
     conn.commit()
     cur.close()
 
