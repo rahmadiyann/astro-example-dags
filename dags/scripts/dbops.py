@@ -10,14 +10,14 @@ conn = psycopg2.connect(
 )
 
 #get the name from table priority_job
-def update_end_time(context, dagname):
+def update_end_time(dagname):
     end_time = datetime.now().strftime("%H:%M")
     cur = conn.cursor()
     cur.execute("UPDATE priority_job SET end_time = %s, status = 'DONE' WHERE job_name = %s", (str(end_time), dagname))
     conn.commit()
     cur.close()
 
-def update_status(context, dagname):
+def update_status(dagname):
     cur = conn.cursor()
     cur.execute("UPDATE priority_job SET status = 'RUNNING' WHERE job_name = %s", (dagname,))
     conn.commit()
