@@ -22,7 +22,7 @@ dag = DAG(
     dagname,
     default_args=default_args,
     description=dagname,
-    schedule_interval='0 * 23-23,0-9 * * *',
+    schedule_interval='0 23-23,0-9 * * *',
     catchup=False,
     tags=['priority']
 )
