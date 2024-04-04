@@ -36,7 +36,7 @@ mis_corporate_sensing = ExternalTaskSensor(
     external_task_id='end',
     mode='poke',
     poke_interval=60,
-    timeout=60*60,
+    timeout=60*60*5,
     dag=dag,
 )
 clear = PythonOperator(
