@@ -32,8 +32,8 @@ start = DummyOperator(
 )
 mis_corporate_sensing = ExternalTaskSensor(
     task_id='mis_corporate_sensing',
-    external_dag_id='mis_corporate_sensing',
-    external_task_id='end',
+    external_dag_id='dag_cbs_mis_corporate',
+    external_task_id='done',
     mode='poke',
     poke_interval=60,
     timeout=60*60*5,
