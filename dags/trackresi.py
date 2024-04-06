@@ -28,7 +28,6 @@ dag = DAG(
 )
 start = DummyOperator(
     task_id='start',
-    op_kwargs={"dagname": dagname},
     dag=dag,
 )
 
