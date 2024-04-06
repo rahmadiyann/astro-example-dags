@@ -17,7 +17,7 @@ default_args = {
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
 }
-dagname = "cbs_loaniq_to_ods"
+dagname = "track_resi"
 dag = DAG(
     dagname,
     default_args=default_args,
