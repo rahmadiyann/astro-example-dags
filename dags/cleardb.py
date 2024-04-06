@@ -22,7 +22,7 @@ dag = DAG(
     dagname,
     default_args=default_args,
     description=dagname,
-    schedule_interval='0 8 * * *',
+    schedule_interval='0 11 * * *',
     catchup=False,
     tags=['priority']
 )
@@ -30,15 +30,7 @@ start = DummyOperator(
     task_id='start',
     dag=dag,
 )
-mis_corporate_sensing = ExternalTaskSensor(
-    task_id='mis_corporate_sensing',
-    external_dag_id='dag_cbs_mis_corporate',
-    external_task_id='done',
-    mode='poke',
-    poke_interval=60,
-    timeout=60*60*5,
-    dag=dag,
-)
+
 clear = PythonOperator(
     task_id='clear',
     python_callable=clear_end_time,
@@ -49,4 +41,4 @@ end = DummyOperator(
     dag=dag,
 )
 
-start >> mis_corporate_sensing >> clear >> end
+start >> clear >> end
