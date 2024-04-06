@@ -18,7 +18,7 @@ dag = DAG(
 
 sites = {
     "rian.social": "http://www.rian.social/dontdie",
-    "rahmadiyan's_backend": "https://riansbackend.onrender.com/dontdie"
+    "rahmadiyan_backend": "https://riansbackend.onrender.com/dontdie"
 }
 
 def call_dontdie(url):
