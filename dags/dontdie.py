@@ -16,16 +16,22 @@ dag = DAG(
 
 #Define tasks
 
-def call_dontdie():
+sites = {
+    "rian.social": "http://www.rian.social/dontdie",
+    "rahmadiyan's_backend": "https://riansbackend.onrender.com/dontdie"
+}
+
+def call_dontdie(url):
     r = requests.get("http://www.rian.social/dontdie")
     print(r.text)
 
 start = DummyOperator(task_id="start", dag=dag)
 end = DummyOperator(task_id="end", dag=dag)
-call = PythonOperator(
-    task_id="call_dontdie",
-    python_callable=call_dontdie,
-    dag=dag,
-)
-
-start >> call >> end
+for site, url in sites.items():
+    call = PythonOperator(
+        task_id=f"call_{site}",
+        python_callable=call_dontdie,
+        op_kwargs={"url": url},
+        dag=dag,
+    )
+    start >> call >> end
