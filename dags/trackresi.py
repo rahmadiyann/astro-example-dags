@@ -32,7 +32,7 @@ start = DummyOperator(
 )
 
 def call():
-    response = requests.get("https://rian.social/api/cekresi/track")
+    response = requests.get("https://www.rian.social/api/cekresi/track")
     print(response.text)
 
 execute = PythonOperator(
