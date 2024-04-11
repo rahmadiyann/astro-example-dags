@@ -6,10 +6,10 @@ import requests
 
 # Define the basic parameters of the DAG, like schedule and start_date
 dag = DAG(
-    "crons",
+    "cron_job",
     start_date=datetime(2024, 4, 1, 0, 0),
     schedule="*/5 * * * *",
-    catchup=True,
+    catchup=False,
     default_args={"owner": "rian"},
     tags=["priority"],
 )
