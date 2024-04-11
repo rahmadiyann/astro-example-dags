@@ -24,7 +24,7 @@ sites = {
 # Create a function to make a request to a URL
 def make_request(url):
     r = requests.get(url)
-    print(r.text)
+    print(f"Response: {r.text}")
 
 # Define tasks
 start = DummyOperator(task_id="start", dag=dag)
