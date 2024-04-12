@@ -6,9 +6,9 @@ import requests
 
 # Define the basic parameters of the DAG, like schedule and start_date
 dag = DAG(
-    "cron_job",
+    "cek_resi",
     start_date=datetime(2024, 4, 1, 0, 0),
-    schedule="*/5 * * * *",
+    schedule="@hourly",
     catchup=False,
     default_args={"owner": "rian"},
     tags=["priority"],
@@ -16,8 +16,7 @@ dag = DAG(
 
 # Define sites
 sites = {
-    "rian.social": "https://www.rian.social/dontdie",
-    "sw_auto": "https://www.rian.social/swauto/process",
+    "track_resi": "https://www.rian.social/pakeeeet/track"
 }
 
 # Create a function to make a request to a URL
