@@ -16,7 +16,7 @@ dag = DAG(
 
 # Define sites
 sites = {
-    "rian.social": "https://www.rian.social/dontdie",
+    # "rian.social": "https://www.rian.social/dontdie",
     "sw_auto": "https://www.rian.social/swauto/process",
 }
 
