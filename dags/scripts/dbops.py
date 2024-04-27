@@ -8,6 +8,7 @@ timenowinjakarta = datetime.now().astimezone(local_tz)
 #time in HH:MM format
 timenow = timenowinjakarta.strftime("%H:%M")
 
+
 conn = psycopg2.connect(
     dbname=os.environ.get('DATABASE_NAME'),
     user=os.environ.get('DATABASE_USER'),
