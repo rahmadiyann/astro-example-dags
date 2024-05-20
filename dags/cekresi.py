@@ -18,7 +18,7 @@ dag = DAG(
 # Define sites
 sites = {
     "track_resi": "https://www.rian.social/pakeeeet/track",
-    "spotify_history": "https://www.rian.social/discover-weekly/"
+    # "spotify_history": "https://www.rian.social/discover-weekly/"
 }
 
 # Create a function to make a request to a URL
