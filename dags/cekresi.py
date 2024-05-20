@@ -6,9 +6,10 @@ import requests
 
 # Define the basic parameters of the DAG, like schedule and start_date
 dag = DAG(
-    "cek_resi",
+    "hourly_cron",
     start_date=datetime(2024, 4, 1, 0, 0),
-    schedule="@hourly",
+    # set schedule to every 55 minute
+    schedule="55 * * * *",
     catchup=False,
     default_args={"owner": "rian"},
     tags=["priority"],
@@ -16,7 +17,8 @@ dag = DAG(
 
 # Define sites
 sites = {
-    "track_resi": "https://www.rian.social/pakeeeet/track"
+    "track_resi": "https://www.rian.social/pakeeeet/track",
+    "spotify_history": "https://www.rian.social/discover-weekly/"
 }
 
 # Create a function to make a request to a URL
